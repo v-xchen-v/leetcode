@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.length()==0 || s.length()==1)
+            return s.length();
+        int start = 0,end = 0;
+        int max = 0;
+        map<char,int>my_map;
+        while(end<=s.length()-1)
+        {
+            if(my_map.find(s[end])!=my_map.end())
+            {
+                
+                start=my_map.find(s[end])->second+1;
+                // cout<<"find "<<s[end]<<" at "<<start-1<<endl;
+                max = max > end-start+1? max: end-start+1;
+                my_map.clear();
+                my_map[s[start]]=start;
+                // cout<<"insert pair "<<s[start]<<" "<<start<<endl;
+                end=start+1;
+            }else
+            {
+                my_map[s[end]]=end;
+                max = max > end-start+1? max: end-start+1;
+                end++;
+            }
+            // cout<<"max:"<<max<<" "<<end<<" "<<start<<endl;
+        }
+    return max;
+    }
+};
