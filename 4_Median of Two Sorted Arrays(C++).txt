@@ -1,0 +1,34 @@
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int midIndex = (nums1.size()+nums2.size()-1)/2;
+        int index1 = 0,index2 = 0;//遍历nums1和nums2的游标
+        vector<int>vc;
+        bool evenF = (nums1.size()+nums2.size())%2==0 ? true:false;
+        while(index1<nums1.size() || index2<nums2.size())
+        {
+            if(index1 == nums1.size())//说明nums1为空或者遍历到nums1的最后一个数
+            {
+                vc.push_back(nums2[index2++]);
+                continue;
+            }
+            if(index2 == nums2.size())//说明nums2为空或者遍历到nums2的最后一个数
+            {
+                vc.push_back(nums1[index1++]);
+                continue;    
+            }
+            //可以进行到这里，说明nums1和nums2中都还有没遍历的值
+            if(nums1[index1] >= nums2[index2])
+            {
+                vc.push_back(nums2[index2++]);
+            }else
+            {
+                vc.push_back(nums1[index1++]);
+            }
+        }
+        if(evenF)
+            return ((double)vc[midIndex]+(double)vc[midIndex+1])/2;
+        else
+            return vc[midIndex];
+    }
+};
