@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+//两个游标指向要交换的元素，分别向从字符头部和字符尾部向中间逼近
 class Solution {
 public:
     string reverseString(string s) {
@@ -9,6 +10,8 @@ public:
         while(start<end)
         {
             swap(s[start], s[end]);
+            start++;
+            end--;
         }
         return s;
     }
